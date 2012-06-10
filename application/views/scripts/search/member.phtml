@@ -1,0 +1,30 @@
+<p>Please enter a search query to find clients and cases.</p>
+<?php
+echo $this->form;
+
+if (isset($this->clients)) {
+    $addClientUrl = $this->baseUrl(App_Resources::MEMBER . '/editClient');
+
+    if ($this->clients) {
+?>
+<div class=search-results>
+<table class=search-results>
+<?php
+foreach (array_values($this->clients) as $i => $client) {
+    echo $this->partial('partial/searchResultClient.phtml', array('i' => $i, 'client' => $client));
+}
+?>
+</table>
+</div>
+<p>Would you like to <a href="<?php echo $this->escape($addClientUrl); ?>">add a new client</a>?</p>
+<?php
+    } else {
+?>
+<p>
+Your search query returned no results.
+Would you like to <a href="<?php echo $this->escape($addClientUrl); ?>">add a new client</a>?
+</p>
+<?php
+    }
+}
+?>

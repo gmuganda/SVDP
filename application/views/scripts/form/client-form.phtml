@@ -1,0 +1,88 @@
+<?php
+function isMissingPhone($element)
+{
+    return $element->cellPhone->hasErrors()
+        && $element->cellPhone->getValue() === ''
+        && $element->homePhone->getValue() === ''
+        && $element->workPhone->getValue() === '';
+}
+?>
+<input type=submit name=submit value="" class=hide>
+<?php echo $this->element->fixedClientData, $this->element->fixedClientDataHash; ?>
+<?php if ($this->editing) { ?>
+<fieldset class=row-fluid>
+    <legend>General information:</legend>
+
+    <div class=span6><?php echo $this->element->clientId; ?></div>
+    <div class=span6><?php echo $this->element->userName; ?></div>
+
+    <div class=span6><?php echo $this->element->createdDate; ?></div>
+</fieldset>
+<?php } ?>
+<fieldset class=row-fluid>
+    <legend>Personal information:</legend>
+
+    <div class=span6><?php echo $this->element->firstName; ?></div>
+    <div class=span6><?php echo $this->element->lastName; ?></div>
+
+    <div class=span6><?php echo $this->element->otherName; ?></div>
+    <div class=span6><?php echo $this->element->birthDate; ?></div>
+
+    <div class=span6><?php echo $this->element->ssn4; ?></div>
+    <div class=span6><?php echo $this->element->maritalStatus; ?></div>
+
+    <div class="span6 member-spouse"><?php echo $this->element->spouseName; ?></div>
+    <div class="span6 member-spouse"><?php echo $this->element->spouseBirthDate; ?></div>
+    <div class="span6 member-spouse"><?php echo $this->element->spouseSsn4; ?></div>
+</fieldset>
+
+<fieldset class=row-fluid>
+    <legend>Additional information:</legend>
+
+    <div class=span6><?php echo $this->element->doNotHelp; ?></div>
+    <div class="span6 member-donothelp"><?php echo $this->element->doNotHelpReason; ?></div>
+
+    <div class=span6><?php echo $this->element->veteran; ?></div>
+    <div class=span6><?php echo $this->element->parish; ?></div>
+</fieldset>
+
+<fieldset class=row-fluid>
+    <legend>Contact information:</legend>
+
+    <div class=span6><?php echo $this->element->cellPhone; ?></div>
+    <div class=span6><?php echo $this->element->homePhone; ?></div>
+
+    <div class=span6><?php echo $this->element->workPhone; ?></div>
+    <div class=span6><div class="control-group<?php if (isMissingPhone($this->element)) { echo ' error'; } ?>"><div class=controls><p class=help-block>(At least one phone required)</p></div></div></div>
+</fieldset>
+
+<fieldset class=row-fluid>
+    <legend>Current address:</legend>
+
+    <?php
+    if ($this->editing && !$this->readOnly) {
+        echo $this->element->changeType;
+    }
+
+    echo $this->element->addr->addrId;
+    ?>
+
+    <div class=span6><?php echo $this->element->addr->street; ?></div>
+    <div class=span6><?php echo $this->element->addr->apt; ?></div>
+
+    <div class=span6><?php echo $this->element->addr->city; ?></div>
+    <div class=span6><?php echo $this->element->addr->state; ?></div>
+
+    <div class=span6><?php echo $this->element->addr->zip; ?></div>
+    <div class=span6><?php echo $this->element->addr->resideParish; ?></div>
+</fieldset>
+
+<?php echo $this->element->householderRecordList; ?>
+
+<?php echo $this->element->employerRecordList; ?>
+<?php if (!$this->readOnly) { ?>
+
+<div class=form-actions>
+    <?php echo $this->element->submit; ?>
+</div>
+<?php } ?>

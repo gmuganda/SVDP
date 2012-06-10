@@ -1,0 +1,19 @@
+<?php
+if (isset($this->latitude, $this->longitude)) {
+    $clientCoordsJs = 'new google.maps.LatLng('
+        . Zend_Json::encode($this->latitude) . ', ' . Zend_Json::encode($this->longitude) . ')';
+    $centerCoordsJs = $clientCoordsJs;
+} else {
+    $centerCoordsJs = 'new google.maps.LatLng(41.736205, -88.147425)';
+}
+?>
+<?php $this->headScript()->captureStart(); ?>
+$(function() {
+<?php if (isset($clientCoordsJs)) { ?>
+    renderMap(<?php echo $centerCoordsJs; ?>, <?php echo $clientCoordsJs; ?>);
+<?php } else { ?>
+    renderMap(<?php echo $centerCoordsJs; ?>, null);
+<?php } ?>
+});
+<?php $this->headScript()->captureEnd(); ?>
+<?php echo $this->form; ?>

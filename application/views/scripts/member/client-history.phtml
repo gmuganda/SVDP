@@ -1,0 +1,25 @@
+<fieldset>
+    <legend>Current household:</legend>
+    <?php
+    echo $this->partial('partial/clientHistoryEntry.phtml', array(
+        'addr' => $this->client->getCurrentAddr(),
+        'spouse' => $this->client->getSpouse(),
+        'householders' => $this->householders,
+        'client' => $this->client,
+    ));
+    ?>
+</fieldset>
+
+<fieldset>
+    <legend>Previous households:</legend>
+
+    <?php
+    if ($this->history) {
+        foreach ($this->history as $historyEntry) {
+            echo $this->partial('partial/clientHistoryEntry.phtml', $historyEntry);
+        }
+    } else {
+    ?>
+    <p class="search-results help-block">No previous households on record.</p>
+    <?php } ?>
+</fieldset>

@@ -1,0 +1,29 @@
+<p>Please enter a search query to find check requests.</p>
+<?php
+echo $this->form;
+
+if (isset($this->checkReqs)) {
+    if ($this->checkReqs) {
+?>
+<div class=search-results>
+<table class=search-results>
+<?php
+foreach (array_values($this->checkReqs) as $i => $checkReq) {
+    echo $this->partial('partial/searchResultCheckReq.phtml', array(
+        'i' => $i,
+        'checkReq' => $checkReq,
+    ));
+}
+?>
+</table>
+</div>
+<?php
+    } else {
+?>
+<p>
+Your search query returned no results.
+</p>
+<?php
+    }
+}
+?>

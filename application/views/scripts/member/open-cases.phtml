@@ -1,0 +1,22 @@
+<?php
+if (empty($this->cases)) {
+?>
+<p>You currently have no open cases.</p>
+<?php
+} else {
+?>
+<fieldset>
+    <legend>Your currently open cases:</legend>
+    <div class=search-results>
+    <table class=search-results>
+    <?php
+    foreach (array_values($this->cases) as $i => $case) {
+        echo $this->partial('partial/searchResultCase.phtml', array('i' => $i, 'case' => $case));
+    }
+    ?>
+    </table>
+    </div>
+</fieldset>
+<?php
+}
+?>

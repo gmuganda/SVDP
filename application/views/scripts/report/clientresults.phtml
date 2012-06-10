@@ -1,0 +1,94 @@
+<?php $baseUrl = new Zend_View_Helper_BaseUrl();
+    $format = new App_Formatting();
+    
+    /** This page displays information about the client based on clients id*/
+    ?>
+ 
+<table>
+    <tr>
+        <td><h2><center>St. Vincent de Paul&nbsp;&nbsp;</center></h2></td><td>&nbsp;</td>
+         <td>&nbsp;</td>    
+    </tr>
+    <tr>
+        <td><h4><center>Client Information Report&nbsp;</center></h4></td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Client Information &nbsp;</strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Client ID:&nbsp;<?php echo $this->client->getId() ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Created:&nbsp;<?php echo $format->formatDate($this->client->getCreatedDate()) ?> &nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Client Name:&nbsp;<?php echo $this->client->getFullName() ?> &nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marital Status:&nbsp;<?php if($this->client->isMarried())
+                                    {echo "Married";}else{echo "Single";} ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spouse:&nbsp;<?php if($this->client->isMarried())
+                                    {echo $this->escape($this->client->getSpouse()->getFullName());} ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Address:&nbsp;<?php echo $this->client->getCurrentAddr()->getStreet()?>
+        &nbsp;<?php echo $this->client->getCurrentAddr()->getCity() ?>
+        &nbsp;<?php echo $this->client->getCurrentAddr()->getState() ?>
+        ,&nbsp; <?php echo $this->client->getCurrentAddr()->getZip() ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home Phone:&nbsp; <?php echo $this->client->getFormattedHomePhone()?> &nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cell Phone:&nbsp; <?php echo$this->client->getFormattedCellPhone()?> &nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Work Phone:&nbsp;<?php echo $this->client->getFormattedWorkPhone() ?> &nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parish:&nbsp; <?php echo $this->client->getParish()?> &nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Veteran:&nbsp;<?php if($this->client->isVeteran()){echo "Yes";}else{echo "No";} ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="<?php echo $baseUrl->baseUrl('/report/clientpdf/')?>" method=post>
+            <input type="hidden" name="clientid" value="<?php echo $this->client->getId() ?>">
+            <input type="submit" value="Generate PDF" class="btn btn-success">
+            </form>
+        </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>

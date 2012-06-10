@@ -1,0 +1,6 @@
+/library/Zend/*
+/.settings
+/.buildpath
+/.project
+application/reports/*.pdf
+.env

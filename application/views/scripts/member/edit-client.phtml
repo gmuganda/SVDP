@@ -1,0 +1,12 @@
+<?php
+if (!$this->readOnly) {
+    $this->headScript()->captureStart();
+?>
+$(function() {
+    initClientForm();
+});
+<?php
+    $this->headScript()->captureEnd();
+}
+?>
+<?php echo $this->form; ?>

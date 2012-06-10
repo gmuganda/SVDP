@@ -1,0 +1,23 @@
+<?php
+if (empty($this->checkReqs)) {
+?>
+<p>No Open Check Requests.</p>
+<?php
+} else {
+?>
+<p>Open Check Requests.</p>
+<div class=search-results>
+<table class=search-results>
+<?php
+foreach (array_values($this->checkReqs) as $i => $checkReq) {
+    echo $this->partial('partial/searchResultCheckReq.phtml', array(
+        'i' => $i,
+        'checkReq' => $checkReq,
+    ));
+}
+?>
+</table>
+</div>
+<?php
+}
+?>

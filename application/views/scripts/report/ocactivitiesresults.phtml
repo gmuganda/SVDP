@@ -1,0 +1,107 @@
+<?php $baseUrl = new Zend_View_Helper_BaseUrl();
+    //service formatting object
+    $format = new App_Formatting();?>
+
+<table>
+    <tr>
+        <td>&nbsp;</td><td><h2><center>St. Vincent de Paul&nbsp;&nbsp;</center></h2></td>
+        <td>&nbsp;</td> <td>&nbsp;</td>    
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td><h4><center>On Call Activities Report&nbsp;</center></h4></td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td><center><?php echo $this->escape($this->start) ?>&nbsp; - &nbsp; <?php echo $this->escape($this->end) ?></center></td>        
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Home Visits &nbsp;</strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of Home Visits:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->escape($this->home) ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>        
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of People Helped:&nbsp;<?php echo $this->escape($this->homeHelped) ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Telephone Contact &nbsp;</strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of Phone Visits:&nbsp;&nbsp;&nbsp;<?php echo $this->escape($this->tele) ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of People Helped:&nbsp;<?php echo $this->escape($this->teleHelped) ?></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Referrals &nbsp;</strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of Referrals:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->escape($this->referrals) ?>&nbsp;</td>
+        <td>&nbsp;</td>        
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# of People Helped:&nbsp;<?php echo $this->escape($this->referHelped) ?>&nbsp;</td>
+        <td>&nbsp;</td>        
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Total People Helped: </strong>&nbsp;<?php $sum = $this->referHelped + $this->teleHelped
+                                                                + $this->homeHelped; echo $this->escape($sum) ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Estimated # of Hours: </strong>&nbsp;<?php echo $this->escape($this->totalHours) ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><strong>Estimated # of Miles: </strong>&nbsp;&nbsp;<?php echo $this->escape($this->totalMiles) ?>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="<?php echo $baseUrl->baseUrl('/report/ocapdf/')?>" method=post>
+                <input type="hidden" name="startDate" value="<?php echo $this->start ?>">
+                <input type="hidden" name="endDate" value="<?php echo $this->end ?>">
+                <input type="submit" value="Generate PDF" class="btn btn-success">    
+            </form>
+        </td>
+        <td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+</table>
